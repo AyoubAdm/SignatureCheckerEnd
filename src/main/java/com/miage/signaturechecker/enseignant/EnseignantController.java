@@ -12,11 +12,13 @@ public class EnseignantController {
     @Autowired
     private EnseignantService enseignantService;
 
+    @CrossOrigin
     @GetMapping
     public List<Enseignant> findAll() {
         return enseignantService.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public Enseignant findById(@PathVariable int id) {
         return enseignantService.findById(id);
@@ -27,12 +29,14 @@ public class EnseignantController {
         return enseignantService.save(enseignant);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public Enseignant update(@RequestBody Enseignant enseignant, @PathVariable int id) {
-        enseignant.setId_ens(id);
+        enseignant.setIdEns(id);
         return enseignantService.save(enseignant);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable int id) {
         enseignantService.deleteById(id);

@@ -1,59 +1,47 @@
 package com.miage.signaturechecker.matiere;
 
 import com.miage.signaturechecker.enseignant.Enseignant;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "matiere")
 public class Matiere {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_mat;
-    private String nom_mat;
+    private int idMat;
 
-    @ManyToOne
-    @JoinColumn(name = "id_ens")
-    private Enseignant enseignant;
+
+    private String nomMat;
+
 
 
     // Constructeurs, getters et setters
 
 
-    public Matiere(int id_mat, String nom_mat, Enseignant enseignant) {
-        this.id_mat = id_mat;
-        this.nom_mat = nom_mat;
-        this.enseignant = enseignant;
+    public Matiere(int id, String nom, Enseignant enseignant) {
+        this.idMat = id;
+        this.nomMat = nom;
+
     }
 
     public Matiere() {
     }
 
-    public int getId_mat() {
-        return id_mat;
+    public int getIdMat() {
+        return idMat;
     }
 
-    public void setId_mat(int id_mat) {
-        this.id_mat = id_mat;
+    public void setIdMat(int idMat) {
+        this.idMat = idMat;
     }
 
-    public String getNom_mat() {
-        return nom_mat;
+    public String getNomMat() {
+        return nomMat;
     }
 
-    public void setNom_mat(String nom_mat) {
-        this.nom_mat = nom_mat;
+    public void setNomMat(String nomMat) {
+        this.nomMat = nomMat;
     }
 
-    public Enseignant getEnseignant() {
-        return enseignant;
-    }
-
-    public void setEnseignant(Enseignant enseignant) {
-        this.enseignant = enseignant;
-    }
 }

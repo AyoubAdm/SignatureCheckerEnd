@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/absences")
@@ -24,11 +25,17 @@ public class AbsenceController {
         return absenceService.findById(id);
     }
 
+    @CrossOrigin
+    @GetMapping("/totalAbsencesEtudiant")
+    public List<Map<String, Object>> findTotalAbsencesByStudent() {
+        return absenceService.findTotalAbsencesByStudent();
+    }
+
 
     @CrossOrigin
     @GetMapping("/etudiant/{id}")
-    public List<Absence> findByEtudiantId(@PathVariable int id) {
-        return absenceService.findByEtudiantId(id);
+    public List<Absence> findByEtudiantIdEtu(@PathVariable int id) {
+        return absenceService.findByEtudiantIdEtu(id);
     }
 
     @PostMapping
@@ -38,7 +45,7 @@ public class AbsenceController {
 
     @PutMapping("/{id}")
     public Absence update(@RequestBody Absence absence, @PathVariable int id) {
-        absence.setId(id);
+        absence.setIdAbs(id);
         return absenceService.save(absence);
     }
 
@@ -47,4 +54,6 @@ public class AbsenceController {
         absenceService.deleteById(id);
     }
 }
+
+
 

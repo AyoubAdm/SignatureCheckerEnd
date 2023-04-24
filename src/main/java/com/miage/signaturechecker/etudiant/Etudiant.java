@@ -8,43 +8,64 @@ public class Etudiant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_etu")
-    private int id;
-    private String nom_etu;
-    private String promo_etu;
+    private int idEtu;
+    private String nomEtu;
+    private String promo;
+    private String td;
+
+    private String tp;
 
     // Constructeurs, getters et setters
 
-    public Etudiant(int id, String promo_etu, String nom_etu) {
-        this.id = id;
-        this.nom_etu = nom_etu;
-        this.promo_etu = promo_etu;
+    public Etudiant(int id, String promo, String nom, String td, String tp) {
+        this.idEtu = id;
+        this.nomEtu = nom;
+        this.promo = promo;
+        this.td = td;
+        this.tp = tp;
     }
+
 
     public Etudiant() {
     }
 
-    public String getNom_etu() {
-        return nom_etu;
+    public int getIdEtu() {
+        return idEtu;
     }
 
-    public void setNom_etu(String nom_etu) {
-        this.nom_etu = nom_etu;
+    public void setIdEtu(int idEtu) {
+        this.idEtu = idEtu;
     }
 
-    public int getId() {
-        return id;
+    public String getNomEtu() {
+        return nomEtu;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setNomEtu(String nomEtu) {
+        this.nomEtu = nomEtu;
     }
 
-    public String getPromo_etu() {
-        return promo_etu;
+    public String getPromo() {
+        return promo;
     }
 
-    public void setPromo_etu(String promo_etu) {
-        this.promo_etu = promo_etu;
+    public void setPromo(String promo) {
+        this.promo = promo;
+    }
+
+    public String getTd() {
+        return td;
+    }
+
+    public void setTd(String td) {
+        this.td = td;
+    }
+
+    public String getTp() {
+        return tp;
+    }
+
+    public void setTp(String tp) {
+        this.tp = tp;
     }
 }

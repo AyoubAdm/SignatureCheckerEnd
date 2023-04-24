@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AbsenceService {
@@ -19,7 +20,7 @@ public class AbsenceService {
         return absenceRepository.findById(id).orElse(null);
     }
 
-    public List<Absence> findByEtudiantId(int id){ return absenceRepository.findByEtudiantId(id);}
+    public List<Absence> findByEtudiantIdEtu(int id){ return absenceRepository.findByEtudiantIdEtu(id);}
 
     public Absence save(Absence absence) {
         return absenceRepository.save(absence);
@@ -27,6 +28,10 @@ public class AbsenceService {
 
     public void deleteById(int id) {
         absenceRepository.deleteById(id);
+    }
+
+    public List<Map<String, Object>> findTotalAbsencesByStudent() {
+        return absenceRepository.findTotalAbsencesByStudent();
     }
 }
 

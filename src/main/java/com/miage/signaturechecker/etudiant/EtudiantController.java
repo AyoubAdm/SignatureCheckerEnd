@@ -31,7 +31,7 @@ public class EtudiantController {
 
     @PutMapping("/{id}")
     public Etudiant update(@RequestBody Etudiant etudiant, @PathVariable int id) {
-        etudiant.setId(id);
+        etudiant.setIdEtu(id);
         return etudiantService.save(etudiant);
     }
 

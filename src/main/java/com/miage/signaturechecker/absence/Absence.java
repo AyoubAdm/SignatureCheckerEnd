@@ -3,49 +3,48 @@ package com.miage.signaturechecker.absence;
 import com.miage.signaturechecker.etudiant.Etudiant;
 
 import com.miage.signaturechecker.matiere.Matiere;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
+
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "absence")
 public class Absence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int idAbs;
 
     @ManyToOne
-    @JoinColumn(name = "id_etu")
+    @JoinColumn(name = "etuAbs")
     private Etudiant etudiant;
 
     @ManyToOne
-    @JoinColumn(name = "id_mat")
+    @JoinColumn(name = "matAbs")
     private Matiere matiere;
 
-    private LocalDate date_abs;
+    private LocalDate dateAbs;
 
     // Constructeurs, getters et setters
 
-    public Absence(int id, Etudiant etudiant, Matiere matiere, LocalDate date_abs) {
-        this.id = id;
+    public Absence(int id, Etudiant etudiant, Matiere matiere, LocalDate date) {
+        this.idAbs = id;
         this.etudiant = etudiant;
         this.matiere = matiere;
-        this.date_abs = date_abs;
+        this.dateAbs = date;
     }
+
 
     public Absence() {
+
     }
 
-    public int getId() {
-        return id;
+    public int getIdAbs() {
+        return idAbs;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdAbs(int idAbs) {
+        this.idAbs = idAbs;
     }
 
     public Etudiant getEtudiant() {
@@ -64,14 +63,12 @@ public class Absence {
         this.matiere = matiere;
     }
 
-    public LocalDate getDate_abs() {
-        return date_abs;
+    public LocalDate getDateAbs() {
+        return dateAbs;
     }
 
-    public void setDate_abs(LocalDate date_abs) {
-        this.date_abs = date_abs;
+    public void setDateAbs(LocalDate dateAbs) {
+        this.dateAbs = dateAbs;
     }
-
-
 }
 

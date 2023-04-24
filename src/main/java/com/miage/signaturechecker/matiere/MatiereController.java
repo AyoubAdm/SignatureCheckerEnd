@@ -29,7 +29,7 @@ public class MatiereController {
 
     @PutMapping("/{id}")
     public Matiere update(@RequestBody Matiere matiere, @PathVariable int id) {
-        matiere.setId_mat(id);
+        matiere.setIdMat(id);
         return matiereService.save(matiere);
     }
 

@@ -24,6 +24,7 @@ public class EtudiantController {
         return etudiantService.findById(id);
     }
 
+    @CrossOrigin
     @PostMapping
     public Etudiant save(@RequestBody Etudiant etudiant) {
         return etudiantService.save(etudiant);

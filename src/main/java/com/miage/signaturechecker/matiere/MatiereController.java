@@ -1,6 +1,7 @@
 package com.miage.signaturechecker.matiere;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,30 +13,35 @@ public class MatiereController {
     @Autowired
     private MatiereService matiereService;
 
+    @CrossOrigin
     @GetMapping
     public List<Matiere> findAll() {
         return matiereService.findAll();
     }
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public Matiere findById(@PathVariable int id) {
         return matiereService.findById(id);
     }
 
+    @CrossOrigin
     @PostMapping
     public Matiere save(@RequestBody Matiere matiere) {
         return matiereService.save(matiere);
     }
 
-    @PutMapping("/{id}")
-    public Matiere update(@RequestBody Matiere matiere, @PathVariable int id) {
-        matiere.setIdMat(id);
-        return matiereService.save(matiere);
+
+    @CrossOrigin
+    @DeleteMapping("/{nomMatiere}")
+    public ResponseEntity<Void> supprimerPromotionParNom(@PathVariable String nomMatiere) {
+        boolean isDeleted = matiereService.deleteByNomMat(nomMatiere);
+        if (isDeleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int id) {
-        matiereService.deleteById(id);
-    }
 }
 

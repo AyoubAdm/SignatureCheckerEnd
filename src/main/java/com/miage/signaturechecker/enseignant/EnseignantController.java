@@ -1,6 +1,7 @@
 package com.miage.signaturechecker.enseignant;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class EnseignantController {
     }
 
     @PostMapping
+    @CrossOrigin
     public Enseignant save(@RequestBody Enseignant enseignant) {
         return enseignantService.save(enseignant);
     }
@@ -37,9 +39,14 @@ public class EnseignantController {
     }
 
     @CrossOrigin
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable int id) {
-        enseignantService.deleteById(id);
+    @DeleteMapping("/{nomEns}")
+    public ResponseEntity<Void> supprimerEnseignantParNom(@PathVariable String nomEns) {
+        boolean isDeleted = enseignantService.deleteByNomEns(nomEns);
+        if (isDeleted) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
 

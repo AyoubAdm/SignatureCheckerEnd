@@ -10,5 +10,7 @@ import java.util.List;
 @Repository
 public interface EtudiantRepository extends JpaRepository<Etudiant, Integer> {
 
+    Etudiant findByNomEtuAndPromo(String nom, String promo);
+
 }
 

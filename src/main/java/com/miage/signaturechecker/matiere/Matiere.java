@@ -8,10 +8,6 @@ import jakarta.persistence.*;
 public class Matiere {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idMat;
-
-
     private String nomMat;
 
 
@@ -20,20 +16,11 @@ public class Matiere {
 
 
     public Matiere(int id, String nom, Enseignant enseignant) {
-        this.idMat = id;
         this.nomMat = nom;
 
     }
 
     public Matiere() {
-    }
-
-    public int getIdMat() {
-        return idMat;
-    }
-
-    public void setIdMat(int idMat) {
-        this.idMat = idMat;
     }
 
     public String getNomMat() {

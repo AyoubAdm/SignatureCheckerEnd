@@ -12,7 +12,6 @@ public class Etudiant {
     private String nomEtu;
     private String promo;
     private String td;
-
     private String tp;
 
     // Constructeurs, getters et setters

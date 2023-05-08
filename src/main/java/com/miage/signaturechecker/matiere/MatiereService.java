@@ -1,5 +1,7 @@
 package com.miage.signaturechecker.matiere;
 
+import com.miage.signaturechecker.promotion.Promotion;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.miage.signaturechecker.matiere.MatiereRepository;
@@ -27,6 +29,17 @@ public class MatiereService {
 
     public void deleteById(int id) {
         matiereRepository.deleteById(id);
+    }
+
+    @Transactional
+    public boolean deleteByNomMat(String nomMat) {
+        Matiere matiere = matiereRepository.findByNomMat(nomMat);
+        if (matiere != null) {
+            matiereRepository.delete(matiere);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

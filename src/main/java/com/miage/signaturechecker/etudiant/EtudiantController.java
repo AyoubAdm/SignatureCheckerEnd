@@ -1,6 +1,9 @@
 package com.miage.signaturechecker.etudiant;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,12 +33,31 @@ public class EtudiantController {
         return etudiantService.save(etudiant);
     }
 
-    @PutMapping("/{id}")
-    public Etudiant update(@RequestBody Etudiant etudiant, @PathVariable int id) {
-        etudiant.setIdEtu(id);
-        return etudiantService.save(etudiant);
+    @CrossOrigin
+    @PutMapping("/{nom}/{promo}")
+    public ResponseEntity<Etudiant> update(@RequestBody Etudiant etudiant, @PathVariable String nom, @PathVariable String promo) {
+        boolean updated = etudiantService.updateEtudiant(nom, promo, etudiant);
+        if (updated) {
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
+
+    @CrossOrigin
+    @DeleteMapping("/{nom}/{promo}")
+    public ResponseEntity<Void> supprimerEtudiantParNomEtPromo(@PathVariable("nom") String nom, @PathVariable("promo") String promo) {
+        boolean etudiantSupprime = etudiantService.deleteByNomAndPromo(nom, promo);
+        if (etudiantSupprime) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @CrossOrigin
+    @Transactional
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable int id) {
         etudiantService.deleteById(id);

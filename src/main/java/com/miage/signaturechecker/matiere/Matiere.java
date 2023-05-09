@@ -4,10 +4,14 @@ import com.miage.signaturechecker.enseignant.Enseignant;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "matiere")
+@Table(name = "matiere", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"nomMat"})
+})
 public class Matiere {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idMat;
     private String nomMat;
 
 
@@ -15,7 +19,7 @@ public class Matiere {
     // Constructeurs, getters et setters
 
 
-    public Matiere(int id, String nom, Enseignant enseignant) {
+    public Matiere(String nom, Enseignant enseignant) {
         this.nomMat = nom;
 
     }

@@ -2,6 +2,7 @@ package com.miage.signaturechecker.etudiant;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,8 +30,14 @@ public class EtudiantController {
 
     @CrossOrigin
     @PostMapping
-    public Etudiant save(@RequestBody Etudiant etudiant) {
-        return etudiantService.save(etudiant);
+    public ResponseEntity<?> save(@RequestBody Etudiant etudiant) {
+        etudiantService.save(etudiant);
+        return ResponseEntity.status(HttpStatus.CREATED).body(etudiant);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Un étudiant avec ce nom et prénom existe déjà");
     }
 
     @CrossOrigin

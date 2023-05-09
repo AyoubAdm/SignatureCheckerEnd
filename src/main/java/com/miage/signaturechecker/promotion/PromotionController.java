@@ -3,6 +3,7 @@ package com.miage.signaturechecker.promotion;
 import com.miage.signaturechecker.etudiant.Etudiant;
 import com.miage.signaturechecker.etudiant.EtudiantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +25,15 @@ public class PromotionController {
 
     @CrossOrigin
     @PostMapping
-    public Promotion save(@RequestBody Promotion promotion) {
-        return promotionService.save(promotion);
+    public ResponseEntity<?> save(@RequestBody Promotion promotion) {
+        promotionService.save(promotion);
+        return ResponseEntity.status(HttpStatus.CREATED).body(promotion);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Une promotion avec ce nom existe déjà");
+    }
 
     @CrossOrigin
     @DeleteMapping("/{nomPromo}")

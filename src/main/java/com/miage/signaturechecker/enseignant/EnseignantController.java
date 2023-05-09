@@ -1,6 +1,8 @@
 package com.miage.signaturechecker.enseignant;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,12 +27,17 @@ public class EnseignantController {
         return enseignantService.findById(id);
     }
 
-    @PostMapping
     @CrossOrigin
-    public Enseignant save(@RequestBody Enseignant enseignant) {
-        return enseignantService.save(enseignant);
+    @PostMapping
+    public ResponseEntity<?> save(@RequestBody Enseignant enseignant) {
+        enseignantService.save(enseignant);
+        return ResponseEntity.status(HttpStatus.CREATED).body(enseignant);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<String> handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Un enseignant avec ce nom existe déjà");
+    }
     @CrossOrigin
     @PutMapping("/{id}")
     public Enseignant update(@RequestBody Enseignant enseignant, @PathVariable int id) {

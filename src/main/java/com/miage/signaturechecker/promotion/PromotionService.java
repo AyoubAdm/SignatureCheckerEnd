@@ -4,6 +4,7 @@ import com.miage.signaturechecker.etudiant.Etudiant;
 import com.miage.signaturechecker.etudiant.EtudiantRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,10 +20,12 @@ public class PromotionService {
         return promotionRepository.findAll();
     }
 
-    public Promotion save(Promotion promotion) {
-        return promotionRepository.save(promotion);
+    public void save(Promotion promotion) {
+        if (promotionRepository.existsById(promotion.getNomPromo())) {
+            throw new DataIntegrityViolationException("Une promotion avec ce nom existe déjà");
+        }
+        promotionRepository.save(promotion);
     }
-
     @Transactional
     public boolean deleteByNomPromo(String nomPromo) {
         Promotion promotion = promotionRepository.findByNomPromo(nomPromo);

@@ -4,9 +4,12 @@ package com.miage.signaturechecker.promotion;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 @Entity
-@Table(name = "promotion")
+@Table(name = "promotion", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"nomPromo"})
+})
 public class Promotion {
 
     @Id
@@ -18,7 +21,6 @@ public class Promotion {
 
     public Promotion() {
     }
-
     public String getNomPromo() {
         return nomPromo;
     }

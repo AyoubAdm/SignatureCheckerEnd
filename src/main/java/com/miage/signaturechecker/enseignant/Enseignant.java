@@ -3,7 +3,9 @@ package com.miage.signaturechecker.enseignant;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "enseignant")
+@Table(name = "enseignant", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"nomEns"})
+})
 public class Enseignant {
 
     @Id

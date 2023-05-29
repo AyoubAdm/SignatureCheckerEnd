@@ -38,17 +38,20 @@ public class AbsenceController {
         return absenceService.findByEtudiantIdEtu(id);
     }
 
+    @CrossOrigin
     @PostMapping
     public Absence save(@RequestBody Absence absence) {
         return absenceService.save(absence);
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public Absence update(@RequestBody Absence absence, @PathVariable int id) {
         absence.setIdAbs(id);
         return absenceService.save(absence);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable int id) {
         absenceService.deleteById(id);

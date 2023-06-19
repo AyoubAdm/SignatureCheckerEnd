@@ -36,11 +36,16 @@ public class Absence {
 
     // Constructeurs, getters et setters
 
-    public Absence(int id, Etudiant etudiant, Matiere matiere, LocalDate date) {
+    public Absence(int id, Etudiant etudiant, Matiere matiere, LocalDate date, String seance, int duree, Boolean estJustifie, String motif) {
         this.idAbs = id;
         this.etudiant = etudiant;
         this.matiere = matiere;
         this.dateAbs = date;
+        this.seance = seance;
+        this.duree = duree;
+        this.estJustifie = estJustifie;
+        this.motif = motif;
+
     }
 
 
@@ -78,6 +83,38 @@ public class Absence {
 
     public void setDateAbs(LocalDate dateAbs) {
         this.dateAbs = dateAbs;
+    }
+
+    public String getSeance() {
+        return seance;
+    }
+
+    public void setSeance(String seance) {
+        this.seance = seance;
+    }
+
+    public int getDuree() {
+        return duree;
+    }
+
+    public void setDuree(int duree) {
+        this.duree = duree;
+    }
+
+    public Boolean getEstJustifie() {
+        return estJustifie;
+    }
+
+    public void setEstJustifie(Boolean estJustifie) {
+        this.estJustifie = estJustifie;
+    }
+
+    public String getMotif() {
+        return motif;
+    }
+
+    public void setMotif(String motif) {
+        this.motif = motif;
     }
 }
 

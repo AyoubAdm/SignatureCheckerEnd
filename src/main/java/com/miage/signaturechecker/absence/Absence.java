@@ -25,6 +25,14 @@ public class Absence {
 
     private LocalDate dateAbs;
 
+    private String seance;
+
+    private int duree;
+
+    private boolean estJustifie;
+
+    private String motif;
+
     // Constructeurs, getters et setters
 
     public Absence(int id, Etudiant etudiant, Matiere matiere, LocalDate date) {

@@ -3,6 +3,7 @@ package com.miage.signaturechecker.absence;
 import com.miage.signaturechecker.etudiant.Etudiant;
 
 import com.miage.signaturechecker.matiere.Matiere;
+import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -29,7 +30,7 @@ public class Absence {
 
     private int duree;
 
-    private boolean estJustifie;
+    private Boolean estJustifie;
 
     private String motif;
 
